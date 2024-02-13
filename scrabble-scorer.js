@@ -96,10 +96,14 @@ function scorerPrompt() {
 };
 
 function transform() {
-   
-
+   const rearrangedObject = {};
+   for (const [letterValue, letterArr] of Object.entries(oldPointStructure)) {
+      for (const letter of letterArr) {
+      rearrangedObject[letter.toLowerCase()] = Number(letterValue);
+   }
+}
+return rearrangedObject   
 };
-
 
 let newPointStructure = transform(oldPointStructure);
 
