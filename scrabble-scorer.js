@@ -49,7 +49,7 @@ function simpleScorer(word) {
 //function where each letter is worth 1 point
 
 function vowelBonusScorer(word) {
-   let score = 0
+   let vowelScore = 0
    let vowels = ['a', 'e', 'i', 'o', 'u'];
    let stringVowels = '';
    let stringConsonants = '';
@@ -61,13 +61,23 @@ function vowelBonusScorer(word) {
            } else {
                stringVowels += word[i]
            }
-           score = (stringVowels.length * 3) + stringConsonants.length
+           vowelScore = (stringVowels.length * 3) + stringConsonants.length
        }  
-       return score
+       return vowelScore
 };
 //function where each vowel is worth 3 points, each consonant is worth 1 point
 
-let scrabbleScorer ;
+function scrabbleScorer(word) {
+   let scrabbleScore = 0
+   for (let i = 0; i < word.length; i++) {
+       for (letter in newPointStructure) {
+           if(letter.includes(word[i])) {
+               scrabbleScore += newPointStructure[letter];
+           }
+           }
+       }
+       return scrabbleScore
+   };
 
 let simpleAlg = {
    name: 'Simple Score',
@@ -84,7 +94,7 @@ let bonusVowelAlg = {
 let traditionalAlg = {
    name: 'Scrabble',
    description: 'The traditional scoring algorithm.',
-   scorerFunction: oldScrabbleScorer
+   scorerFunction: scrabbleScorer
 };
 
 const scoringAlgorithms = [simpleAlg, bonusVowelAlg, traditionalAlg];
@@ -95,10 +105,10 @@ function scorerPrompt() {
    return scoringAlgorithms[pick];
 };
 
-function transform() {
+function transform(object) {
    const rearrangedObject = {};
-   for (const [letterValue, letterArr] of Object.entries(oldPointStructure)) {
-      for (const letter of letterArr) {
+   for ([letterValue, letterArr] of Object.entries(object)) {
+      for (letter of letterArr) {
       rearrangedObject[letter.toLowerCase()] = Number(letterValue);
    }
 }
