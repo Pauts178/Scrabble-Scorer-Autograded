@@ -69,6 +69,7 @@ function vowelBonusScorer(word) {
 
 function scrabbleScorer(word) {
    let scrabbleScore = 0
+   word = word.toLowerCase()
    for (let i = 0; i < word.length; i++) {
        for (letter in newPointStructure) {
            if(letter.includes(word[i])) {
