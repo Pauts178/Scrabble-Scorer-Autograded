@@ -107,7 +107,7 @@ function scorerPrompt() {
 };
 
 function transform(object) {
-   const rearrangedObject = {};
+   let rearrangedObject = {};
    for ([letterValue, letterArr] of Object.entries(object)) {
       for (letter of letterArr) {
       rearrangedObject[letter.toLowerCase()] = Number(letterValue);
